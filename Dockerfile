@@ -9,11 +9,13 @@ RUN set -euxo pipefail ;\
     apk add --no-cache --virtual build-dependencies \
     pcre-dev \
     ${PHPIZE_DEPS} ;\
+    pecl install redis ;\
     docker-php-ext-install \
     mysqli \
     pdo \
     pdo_mysql \
     opcache ;\
+    docker-php-ext-enable redis ;\
     docker-php-ext-enable pdo_mysql ;\
     apk del build-dependencies
 
